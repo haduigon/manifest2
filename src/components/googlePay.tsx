@@ -1,8 +1,13 @@
 import GooglePayButton from '@google-pay/button-react';
+import React from 'react';
 
 export const GooglePayB: React.FC = () => {
+
   return (
-    <div className='mt-2'>
+    <div 
+    className='mt-2' 
+    id='googleButton'
+    >
       <GooglePayButton
         environment='TEST'
         buttonSizeMode='fill'

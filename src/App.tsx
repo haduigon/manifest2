@@ -1,9 +1,9 @@
-import './App.css';
+// import './App.css';
 import 'bulma/css/bulma.css'
 import classNames from 'classnames';
 import { useState } from 'react';
-import GooglePayButton from '@google-pay/button-react';
 import { GooglePayB } from './components/googlePay';
+import { TypeWriter } from './components/TypeWriter';
 
 export const App: React.FC = () => {
   const [isPressed, setIsPressed] = useState(false);
@@ -11,7 +11,6 @@ export const App: React.FC = () => {
   function hanldeClick() {
     setIsPressed(state => !state);
   }
-  console.log(isPressed);
 
   return (
     <div>
@@ -24,10 +23,17 @@ export const App: React.FC = () => {
         'has-text-centered': !isPressed,
       })}>
         <div className='box my-4 mx-6'>
-          Hello, please select the horoscope theme
+          <TypeWriter 
+            text='Hello, please select the horoscope theme'
+            delay={60}
+          />
         </div>
         <div className='has-text-centered'>
           <button
+          style={{
+            width: 240,
+            height: 40,
+          }}
             className='button is-primary'
             onClick={hanldeClick}
           >

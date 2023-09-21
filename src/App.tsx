@@ -5,16 +5,28 @@ import { useState } from 'react';
 import { GooglePayB } from './components/googlePay';
 import { TypeWriter } from './components/TypeWriter';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
-import './styles/index.scss'
+import './styles/index.scss';
+import axios from "axios";
 
 export const App: React.FC = () => {
   const [isPressed, setIsPressed] = useState(false);
   const [typingText, setTypingText] = useState('Hello, please select the horoscope sign');
+  const [horoSign, setHoroSign] = useState('');
 
   const apiUrl = 'http://185.70.185.9:3011';
 
+  const client = axios.create({
+    baseURL: apiUrl, 
+  });
+
   function hanldeClick() {
     setIsPressed(state => !state);
+    client.post('/chat', {
+      prompt: 'write me a horoscope for Capricorn for a week length of message should be 200 words'
+    }).then((resp: any) => {
+      console.log(resp.data.message);
+      setTypingText(resp.data.message);
+    });
   }
 
   return (
@@ -24,7 +36,7 @@ export const App: React.FC = () => {
           Take your Horo forecast right now !
         </h3>
       </div>
-      <div className={classNames('box', {
+      <div className={classNames('box has-text-centered', {
         'has-text-centered': !isPressed,
       })}>
         <div className='box my-4 mx-6'>
@@ -34,7 +46,7 @@ export const App: React.FC = () => {
           />
         </div>
 
-        <div className='has-text-centered'>
+        <div className='has-text-centered' style={{ height: '100px'}}>
 
           <SwitchTransition mode="out-in">
             <CSSTransition

@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { StateContext } from "./AppContext";
+import { ACTIONS } from "./utils";
 
 type Props = {
   text: string,
@@ -10,10 +12,29 @@ type Props = {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trigger, setTrigger] = useState(false);
   const [selectValue, setSelectValue] = useState('');
+  const { state, dispatch } = useContext(StateContext);
 
   function handleSelect(event: React.ChangeEvent<HTMLSelectElement>) {
     setSelectValue(event.target.value);
+    dispatch({ type: ACTIONS.SET_HORO_SIGN, payload: event.target.value })
   }
+
+  console.log(selectValue);
+  
+  const horoSigns = [
+    'Aries',
+    'Taurus',
+    'Gemini',
+    'Cancer',
+    'Leo',
+    'Virgo',
+    'Libra',
+    'Scorpio',
+    'Sagittarius',
+    'Capricorn',
+    'Aquarius',
+    'Pisces',
+  ];
 
   useEffect(() => {
     if (currentIndex < text.length) {
@@ -25,6 +46,8 @@ type Props = {
       return () => clearTimeout(timeout);
     } setTrigger(true);
   }, [currentIndex, delay, text]);
+  console.log(state.horoSign);
+  
 
   return (
     <>
@@ -43,18 +66,11 @@ type Props = {
             onChange={(event) => handleSelect(event)}
           >
             <option>Select your sign</option>
-            <option>Aries</option>
-            <option>Taurus</option>
-            <option>Gemini</option>
-            <option>Cancer</option>
-            <option>Leo</option>
-            <option>Virgo</option>
-            <option>Libra</option>
-            <option>Scorpio</option>
-            <option>Sagittarius</option>
-            <option>Capricorn</option>
-            <option>Aquarius</option>
-            <option>Pisces</option>
+            {horoSigns.map(sign => {
+              return (
+                <option key={sign} value={sign}>{sign}</option>
+              )
+            })}
           </select>
         </div>
       </div>

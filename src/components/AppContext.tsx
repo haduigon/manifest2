@@ -6,17 +6,25 @@ import { ACTIONS } from "./utils";
 import React from "react";
 
 type Action = { type: ACTIONS.SET_HORO_SIGN, payload: string }
+| { type: ACTIONS.SET_TYPING_TEXT, payload: string }
 
 interface Data {
   horoSign: string,
+  typingText: string,
 }
 
 function reducer(state: Data, action: Action): Data {
   switch (action.type) {
     case ACTIONS.SET_HORO_SIGN: 
       return {
+        ...state,
         horoSign: action.payload,
-      }
+      };
+    case ACTIONS.SET_TYPING_TEXT: 
+      return {
+        ...state,
+        typingText: action.payload,
+      };
     default:
       return state;
   }
@@ -25,11 +33,12 @@ function reducer(state: Data, action: Action): Data {
 type State = {
   state: Data,
   dispatch: Dispatch<Action>,
-}
+};
 
 const initialState: State = {
   state: {
     horoSign: '',
+    typingText: 'Hello, please select the horoscope sign',
   },
   dispatch: () => { },
 };

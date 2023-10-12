@@ -1,3 +1,4 @@
 export enum ACTIONS {
   SET_HORO_SIGN,
+  SET_TYPING_TEXT,
 }

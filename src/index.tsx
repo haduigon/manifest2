@@ -4,15 +4,16 @@ import './styles/index.scss';
 import App from './App';
 import 'bulma/css/bulma.css';
 import { AppContextProvider } from './components/AppContext';
+import { Root } from './components/Root';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   // <React.StrictMode>
-  <AppContextProvider>
-    <App />
-  </AppContextProvider>
+  // <AppContextProvider>
+    <Root />,
+  // </AppContextProvider>
     
   //  </React.StrictMode>
 );

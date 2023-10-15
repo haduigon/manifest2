@@ -8,6 +8,7 @@ import { TypeWriter } from "./TypeWriter";
 import { Select } from "./Select";
 import { GooglePayB } from "./googlePay";
 import { useSearchParams } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader'
 
 export const HoroPage: React.FC = () => {
   const [isPressed, setIsPressed] = useState(false);
@@ -16,7 +17,7 @@ export const HoroPage: React.FC = () => {
   const { state, dispatch } = useContext(StateContext);
   const [searchParams, setSearchParams] = useSearchParams();
   console.log(searchParams, 'searchParams');
-  
+
 
   const apiUrl = 'http://185.70.185.9:3011';
 
@@ -27,17 +28,17 @@ export const HoroPage: React.FC = () => {
   let typingText = state.typingText;
 
   function hanldeClick() {
-    const params = new URLSearchParams(searchParams);
-    params.append('sign', state.horoSign);
-    setSearchParams(params);
-    
+    // const params = new URLSearchParams(searchParams);
+    // params.append('sign', state.horoSign);
+    setSearchParams('?sign=', state.horoSign as any);
+
     setIsPressed(state => !state);
     dispatch({ type: ACTIONS.SET_TYPING_TEXT, payload: '' });
     client.post('/chat', {
       prompt: `write me a horoscope for ${state.horoSign} for a week length of message should be 200 words`
     }).then((resp: any) => {
       console.log(resp.data.message);
-      // dispatch({ type: ACTIONS.SET_TYPING_TEXT, payload: '' });
+      dispatch({ type: ACTIONS.SET_TYPING_TEXT, payload: '' });
       dispatch({ type: ACTIONS.SET_TYPING_TEXT, payload: resp.data.message });
     });
   }
@@ -54,14 +55,13 @@ export const HoroPage: React.FC = () => {
             delay={60}
           />
         ) : (
-          <></>
+          <ClipLoader color="#36d7b7" />
+
         )}
-        {/* <TypeWriter
-          text={typingText}
-          delay={60}
-        /> */}
         <Select />
       </div>
+        <div className="has-text-centered" >
+        </div>
 
       <div className='has-text-centered' style={{ height: '100px' }}>
 

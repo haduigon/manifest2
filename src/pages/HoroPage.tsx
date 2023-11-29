@@ -1,41 +1,43 @@
 import classNames from "classnames"
-import { useContext, useState } from "react";
-import { SwitchTransition, CSSTransition } from "react-transition-group"
-import { StateContext } from "./AppContext";
+import { useContext, useEffect, useState } from "react";
+import { SwitchTransition, CSSTransition } from "react-transition-group";
+import { StateContext } from "../components/AppContext";
 import axios from "axios";
-import { ACTIONS } from "./utils";
-import { TypeWriter } from "./TypeWriter";
-import { Select } from "./Select";
-import { GooglePayB } from "./googlePay";
+import { ACTIONS } from "../helpers/utils";
+import { TypeWriter } from "../components/TypeWriter";
+import { LocalSelect } from "../components/select/SelectDateOfBirth";
+import { GooglePayB } from "../components/googlePay";
 import { useSearchParams } from 'react-router-dom';
-import ClipLoader from 'react-spinners/ClipLoader'
+import DotLoader from 'react-spinners/DotLoader';
+import { CheckboxLocal } from '../components/checkbox/CheckboxLocal';
 
 export const HoroPage: React.FC = () => {
   const [isPressed, setIsPressed] = useState(false);
-  // const [typingText, setTypingText] = useState('Hello, please select the horoscope sign');
-  // const [horoSign, setHoroSign] = useState('');
   const { state, dispatch } = useContext(StateContext);
   const [searchParams, setSearchParams] = useSearchParams();
   console.log(searchParams, 'searchParams');
-
 
   const apiUrl = 'http://185.70.185.9:3011';
 
   const client = axios.create({
     baseURL: apiUrl,
   });
+// my-4 mx-6 add this classes if screen is bigger 600px
+  useEffect(() => {
+    const screenWidth = window.innerWidth;
+    console.log(screenWidth, 'screen');
+    
+  }, []);
 
   let typingText = state.typingText;
 
   function hanldeClick() {
-    // const params = new URLSearchParams(searchParams);
-    // params.append('sign', state.horoSign);
-    setSearchParams('?sign=', state.horoSign as any);
+    setSearchParams(`?sign=${state.horoSign}`);
 
     setIsPressed(state => !state);
     dispatch({ type: ACTIONS.SET_TYPING_TEXT, payload: '' });
     client.post('/chat', {
-      prompt: `write me a horoscope for ${state.horoSign} for a week length of message should be 200 words`
+      prompt: `write me a horoscope for ${state.horoSign} for a week.length of response should be 400 words`
     }).then((resp: any) => {
       console.log(resp.data.message);
       dispatch({ type: ACTIONS.SET_TYPING_TEXT, payload: '' });
@@ -43,25 +45,31 @@ export const HoroPage: React.FC = () => {
     });
   }
   console.log(state.typingText, 'tt');
-  console.log(typingText, 'tt2');
+  console.log(typingText.split(' '), 'tt2');
   return (
     <div className={classNames('box has-text-centered', {
       'has-text-centered': !isPressed,
     })}>
-      <div className='box my-4 mx-6'>
+      <div className='box'>
         {state.typingText.length > 0 ? (
           <TypeWriter
             text={state.typingText}
             delay={60}
           />
         ) : (
-          <ClipLoader color="#36d7b7" />
+          <div className="center-div">
+            <DotLoader color="#36d7b7" />
+          </div>
+
 
         )}
-        <Select />
+        <LocalSelect />
+
+        <CheckboxLocal />
+
       </div>
-        <div className="has-text-centered" >
-        </div>
+      <div className="has-text-centered" >
+      </div>
 
       <div className='has-text-centered' style={{ height: '100px' }}>
 
@@ -88,6 +96,7 @@ export const HoroPage: React.FC = () => {
 
       </div>
 
+          
     </div>
   )
 }

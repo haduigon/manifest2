@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { StateContext } from "./AppContext";
-import { ACTIONS } from "./utils";
+import { ACTIONS } from "../helpers/utils";
 
 type Props = {
   text: string,
@@ -26,7 +26,7 @@ type Props = {
 
   return (
     <>
-      <span>{currentText}</span>
+      <h2 className="subtitle is-6">{currentText}</h2>
     </>
   )
 };

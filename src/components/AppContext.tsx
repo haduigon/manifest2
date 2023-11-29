@@ -2,7 +2,7 @@ import {
   Dispatch, 
   useReducer,  
 } from "react";
-import { ACTIONS } from "./utils";
+import { ACTIONS } from "../helpers/utils";
 import React from "react";
 
 type Action = { type: ACTIONS.SET_HORO_SIGN, payload: string }
@@ -38,7 +38,7 @@ type State = {
 const initialState: State = {
   state: {
     horoSign: '',
-    typingText: 'Hello, please select the horoscope sign',
+    typingText: 'Choose when you were born',
   },
   dispatch: () => { },
 };

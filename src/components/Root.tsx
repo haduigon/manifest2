@@ -5,7 +5,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { App } from '../App';
-import { HoroPage } from './HoroPage';
+import { HoroPage } from '../pages/HoroPage';
 import { AppContextProvider } from './AppContext';
 
 export const Root = () => (

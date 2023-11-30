@@ -1,7 +1,7 @@
 import { days, months, years } from '../../helpers/date';
 import { useSearchParams } from "react-router-dom";
 import './select.scss';
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
 
 export const LocalSelect: React.FC = () => {
 
@@ -23,57 +23,51 @@ export const LocalSelect: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
-  type SingleValue = {
-    value: string | number,
+  type SelectOption = {
+    value: string | number | null,
     label: string | number
   }
 
-  const arrayDay: SingleValue[] = [{ value: 'day', label: 'day' }];
-  days.map(day => {
-    const temp = { value: day, label: day }
-    arrayDay.push(temp);
-  })
+  const arrayDay: SelectOption[] = days.map((day) => ({ value: day, label: day}))
 
-  const arrayMonth: SingleValue[] = [{ value: 'month', label: 'month' }];
-  months.map(month => {
-    const temp = { value: month, label: month }
-    arrayMonth.push(temp);
-  })
+  
+  const arrayMonth: SelectOption[] = months.map((month) => ({ value: month, label: month}))
 
-  const arrayYear: SingleValue[] = [{ value: 'year', label: 'year' }];
+
+  const arrayYear: SelectOption[] = years.map((year) => ({ value: year, label: year}))
   years.map(year => {
     const temp = { value: year, label: year }
     arrayYear.push(temp);
   })
 
-  function handleSelectDay(value: SingleValue) {
+  function handleSelectDay(value: SingleValue<SelectOption> ) {
 
-    if (value.value === 'day') {
+    if (value?.value === 'day') {
       params.delete('day')
     } else {
-      params.set('day', String(value.value));
+      params.set('day', String(value?.value));
     }
 
     setSearchParams(params);
 
   }
-  function handleSelectMonth(value: any) {
+  function handleSelectMonth(value: SingleValue<SelectOption>) {
 
-    if (value.value === 'month') {
+    if (value?.value === 'month') {
       params.delete('month')
     } else {
-      params.set('month', String(value.value));
+      params.set('month', String(value?.value));
     }
 
     setSearchParams(params);
 
   }
-  function handleSelectYear(value: SingleValue) {
+  function handleSelectYear(value: SingleValue<SelectOption>) {
 
-    if (value.value === 'year') {
+    if (value?.value === 'year') {
       params.delete('year')
     } else {
-      params.set('year', String(value.value));
+      params.set('year', String(value?.value));
     }
 
     setSearchParams(params);
@@ -87,7 +81,16 @@ export const LocalSelect: React.FC = () => {
         <div className="select mt-2 is-normal pr-1" style={{width: '100px'}}>
           <Select
             options={arrayDay}
-            onChange={(event) => handleSelectDay}
+            styles={{
+              control: (baseStyle) =>({
+                ...baseStyle,
+                cursor: 'pointer',
+              }),
+              option: () => ({
+                cursor: 'pointer'
+            })
+          }}
+            onChange={handleSelectDay}
             placeholder="day"
             isSearchable={false}
           />
@@ -103,7 +106,7 @@ export const LocalSelect: React.FC = () => {
         <div className="select mt-2 is-normal pr-1" style={{width: '100px'}}>
           <Select
             options={arrayYear}
-            onChange={() => handleSelectYear}
+            onChange={handleSelectYear}
             placeholder="year"
             isSearchable={false}
           />

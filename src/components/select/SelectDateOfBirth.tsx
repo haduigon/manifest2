@@ -2,6 +2,9 @@ import { days, months, years } from '../../helpers/date';
 import { useSearchParams } from "react-router-dom";
 import './select.scss';
 import Select, { SingleValue } from "react-select";
+import { FbAnimation } from '../../animation/FbAnimation';
+import { Typewriter } from 'react-simple-typewriter'
+
 
 export const LocalSelect: React.FC = () => {
 
@@ -28,19 +31,19 @@ export const LocalSelect: React.FC = () => {
     label: string | number
   }
 
-  const arrayDay: SelectOption[] = days.map((day) => ({ value: day, label: day}))
-
-  
-  const arrayMonth: SelectOption[] = months.map((month) => ({ value: month, label: month}))
+  const arrayDay: SelectOption[] = days.map((day) => ({ value: day, label: day }))
 
 
-  const arrayYear: SelectOption[] = years.map((year) => ({ value: year, label: year}))
+  const arrayMonth: SelectOption[] = months.map((month) => ({ value: month, label: month }))
+
+
+  const arrayYear: SelectOption[] = years.map((year) => ({ value: year, label: year }))
   years.map(year => {
     const temp = { value: year, label: year }
     arrayYear.push(temp);
   })
 
-  function handleSelectDay(value: SingleValue<SelectOption> ) {
+  function handleSelectDay(value: SingleValue<SelectOption>) {
 
     if (value?.value === 'day') {
       params.delete('day')
@@ -76,36 +79,67 @@ export const LocalSelect: React.FC = () => {
 
   return (
     <div>
-
+      <FbAnimation />
+     <div className='custom-font'>
+     <Typewriter
+            words={['Very long sentence is heeereee !!']}
+            loop={5}
+            cursor
+            cursorStyle='|'
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+            // onLoopDone={handleDone}
+            // onType={handleType}
+          />
+     </div>
       <form>
-        <div className="select mt-2 is-normal pr-1" style={{width: '100px'}}>
+        <div className="select mt-2 is-normal pr-1 custom-font" style={{ width: '100px' }}>
           <Select
             options={arrayDay}
             styles={{
-              control: (baseStyle) =>({
+              control: (baseStyle) => ({
                 ...baseStyle,
                 cursor: 'pointer',
               }),
               option: () => ({
                 cursor: 'pointer'
-            })
-          }}
+              })
+            }}
             onChange={handleSelectDay}
             placeholder="day"
             isSearchable={false}
           />
         </div>
-        <div className="select mt-2 is-normal pr-1" style={{width: '100px'}}>
-         <Select
+        <div className="select mt-2 is-normal pr-1 custom-font" style={{ width: '120px' }}>
+          <Select
+            styles={{
+              control: (baseStyle) => ({
+                ...baseStyle,
+                cursor: 'pointer',
+              }),
+              option: () => ({
+                cursor: 'pointer'
+              })
+            }}
             options={arrayMonth}
             onChange={handleSelectMonth}
             placeholder="month"
             isSearchable={false}
           />
         </div>
-        <div className="select mt-2 is-normal pr-1" style={{width: '100px'}}>
+        <div className="select mt-2 is-normal pr-1 custom-font" style={{ width: '100px' }}>
           <Select
             options={arrayYear}
+            styles={{
+              control: (baseStyle) => ({
+                ...baseStyle,
+                cursor: 'pointer',
+              }),
+              option: () => ({
+                cursor: 'pointer'
+              })
+            }}
             onChange={handleSelectYear}
             placeholder="year"
             isSearchable={false}
@@ -115,7 +149,7 @@ export const LocalSelect: React.FC = () => {
 
 
       <div>
-        
+
       </div>
 
     </div>

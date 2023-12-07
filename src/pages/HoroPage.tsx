@@ -10,6 +10,8 @@ import { GooglePayB } from "../components/googlePay";
 import { useSearchParams } from 'react-router-dom';
 import DotLoader from 'react-spinners/DotLoader';
 import { CheckboxLocal } from '../components/checkbox/CheckboxLocal';
+import { LocalInput } from "../components/inputs/Input";
+import { Gi3DGlasses } from "react-icons/gi";
 
 export const HoroPage: React.FC = () => {
   const [isPressed, setIsPressed] = useState(false);
@@ -22,11 +24,11 @@ export const HoroPage: React.FC = () => {
   const client = axios.create({
     baseURL: apiUrl,
   });
-// my-4 mx-6 add this classes if screen is bigger 600px
+  // my-4 mx-6 add this classes if screen is bigger 600px
   useEffect(() => {
     const screenWidth = window.innerWidth;
     console.log(screenWidth, 'screen');
-    
+
   }, []);
 
   let typingText = state.typingText;
@@ -37,7 +39,7 @@ export const HoroPage: React.FC = () => {
     setIsPressed(state => !state);
     dispatch({ type: ACTIONS.SET_TYPING_TEXT, payload: '' });
     client.post('/chat', {
-      prompt: `write me a horoscope for ${state.horoSign} for a week.length of response should be 400 words`
+      prompt: `write me a horoscope for Sagittarius for a week.`
     }).then((resp: any) => {
       console.log(resp.data.message);
       dispatch({ type: ACTIONS.SET_TYPING_TEXT, payload: '' });
@@ -45,7 +47,7 @@ export const HoroPage: React.FC = () => {
     });
   }
   console.log(state.typingText, 'tt');
-  console.log(typingText.split(' '), 'tt2');
+  // console.log(typingText.split(' '), 'tt2');
   return (
     <div className={classNames('box has-text-centered', {
       'has-text-centered': !isPressed,
@@ -63,6 +65,9 @@ export const HoroPage: React.FC = () => {
 
 
         )}
+
+        <LocalInput />
+
         <LocalSelect />
 
         <CheckboxLocal />
@@ -96,7 +101,8 @@ export const HoroPage: React.FC = () => {
 
       </div>
 
-          
+      <Gi3DGlasses style={{ color: 'blue', width: '30px', height: '30px' }}/>
+
     </div>
   )
 }

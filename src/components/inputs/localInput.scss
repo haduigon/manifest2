@@ -1,8 +1,11 @@
 .input-container {
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  margin-left: 15px;
+  margin-bottom: 30px;
 }
 
 .input-box {
- width: 500px;
+border-radius: 10px;
+margin: 0;
 }

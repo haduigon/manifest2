@@ -12,6 +12,7 @@ const linkClass = (
     >
       <NavLink className={linkClass} to="/">I dont know what is this page</NavLink>
       <NavLink to="/horo" className={linkClass}>Horo</NavLink>
+      <NavLink to="/fb" className={linkClass}>FB</NavLink>
     </nav>
   )
 }

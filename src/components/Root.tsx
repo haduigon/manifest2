@@ -7,6 +7,7 @@ import {
 import { App } from '../App';
 import { HoroPage } from '../pages/HoroPage';
 import { AppContextProvider } from './AppContext';
+import { FbChatLanding } from '../pages/fbChatLp/FbChatLanding';
 
 export const Root = () => (
   
@@ -17,6 +18,7 @@ export const Root = () => (
       <Route path="/" element={<App />} >
         <Route index element={<h1 className='title'>Home page</h1>} />
         <Route path='horo' element={<HoroPage />} />
+        <Route path='fb' element={<FbChatLanding />} />
       </Route>
     </Routes>
     </AppContextProvider>

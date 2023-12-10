@@ -1,0 +1,24 @@
+.page-container {
+  width: 100%;
+}
+
+.message-block {
+  display: flex;
+  justify-content: left;
+}
+
+.part {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-image: url('../../assets/icons/1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 10px;
+}

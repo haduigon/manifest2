@@ -1,9 +1,20 @@
 #wave {
-  margin: 50px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  border-radius: 30px;
+  width: max-content;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: fit-content;
+  max-width: 250px;
+  background: #F5F5F5;
 }
 
 #wave .srfriendzone {
-  margin: 0 5px 0 0px;
+  padding-right: 5px;
+  
 }
 #wave .srsend {
   float: right;
@@ -14,16 +25,23 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  margin-right: 0.5px;
-  background: #60f;
+  margin-right: 3px;
+  background: grey;
   animation: wave 1s linear infinite;
   animation-delay: -0.9s;
 }
 #wave .dot.two {
   animation-delay: -0.7s;
 }
+#wave .dot.three {
+  margin-right: 10px;
+}
 #wave .dot:nth-child(3) {
   animation-delay: -0.6s;
+}
+
+#wave .srtextarea {
+  padding-left: 10px;
 }
 
 @keyframes wave {
@@ -36,4 +54,5 @@
     transform: translateY(-15px);
   }
 }
+
 

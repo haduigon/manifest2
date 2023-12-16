@@ -31,7 +31,7 @@ export const FbMessage: React.FC<Props> = ({ text }) => {
   
   useEffect(() => {
     if (myRef.current) {
-      console.log(myRef.current.offsetTop + myRef.current.offsetHeight, '222');
+      // console.log(myRef.current.offsetTop + myRef.current.offsetHeight, '222');
       myRef.current.scrollIntoView();
     }  
   }, [])

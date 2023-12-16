@@ -2,7 +2,7 @@ import { days, months, years } from '../../helpers/date';
 import { useSearchParams } from "react-router-dom";
 import './select.scss';
 import Select, { SingleValue } from "react-select";
-import { FbAnimation } from '../../animation/FbAnimation';
+import { FbAnimation } from '../../pages/fbChatLp/animation/FbAnimation';
 import { Typewriter } from 'react-simple-typewriter'
 
 

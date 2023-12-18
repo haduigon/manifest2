@@ -1,23 +1,22 @@
-import { useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import "./fbstyles.scss";
 
 type Props = {
-  text: string
+  text: string,
+  child?: ReactNode
 }
 
-export const FbAnimation: React.FC<Props> = ({ text }) => {
+export const FbAnimation: React.FC = () => {
   return (
     <div id="wave">
       <span className="srtextarea"></span>
       <span className="srfriendzone custom-font">
-          {text}
+        Space AI is typing
       </span>
       <span className="dot one"></span>
       <span className="dot two"></span>
       <span className="dot three"></span>
-
       <p className="">
-
       </p>
     </div>
   )
@@ -25,27 +24,56 @@ export const FbAnimation: React.FC<Props> = ({ text }) => {
 
 export const FbMessage: React.FC<Props> = ({ text }) => {
   const myRef = useRef<null | HTMLDivElement>(null);
-  // const screenBottom = window
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
   console.log(windowSize);
-  
+
   useEffect(() => {
     if (myRef.current) {
-      // console.log(myRef.current.offsetTop + myRef.current.offsetHeight, '222');
       myRef.current.scrollIntoView();
-    }  
-  }, [])
+    }
+  }, []);
 
   return (
     <div id="wave" >
       <span className="srtextarea"></span>
       <span className="srfriendzone custom-font">
-          {text}
-      </span>     
+        {text}
+      </span>
       <p className="">
 
       </p>
       <div ref={myRef}></div>
+    </div>
+  )
+}
+
+export const FbAll: React.FC<Props> = ({ text, child }) => {
+
+  const [showTyping, setShowTyping] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [showChild, setShowChild] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowTyping(true);
+    }, 1000)
+    setTimeout(() => {
+      setShowTyping(false);
+    }, 4000)
+    setTimeout(() => {
+      setShowMessage(true);
+    }, 4500);
+    if (child) {
+      setTimeout(() => {
+        setShowChild(true);
+      }, 4600); 
+    }
+  },[]);
+
+  return (
+    <div>
+      {showTyping && <FbAnimation />} {showMessage && <FbMessage text={text} />}
+      {showChild && child}
     </div>
   )
 }

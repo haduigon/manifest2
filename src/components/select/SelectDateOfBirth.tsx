@@ -79,7 +79,7 @@ export const LocalSelect: React.FC = () => {
 
   return (
     <div>
-      <FbAnimation text='Your destiny is typing'/>
+      <FbAnimation />
      <div className='custom-font'>
      <Typewriter
             words={['Very long sentence is heeereee !!']}

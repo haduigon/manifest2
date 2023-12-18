@@ -2,9 +2,15 @@
   width: 100%;
 }
 
+.dialog {
+  display: flex;
+  flex-direction: column; 
+}
+
 .message-block {
   display: flex;
   justify-content: left;
+  // flex-direction: column;
 }
 
 .part {

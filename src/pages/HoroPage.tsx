@@ -66,7 +66,7 @@ export const HoroPage: React.FC = () => {
 
         )}
 
-        <LocalInput />
+        {/* <LocalInput /> */}
 
         <LocalSelect />
 

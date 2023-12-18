@@ -15,14 +15,13 @@ export const CheckboxLocal: React.FC = () => {
     const radio3 = useRadioState() as any;
     const [radioState, setRadioState] = useState('');
 
-    // console.log(checkbox.state, 'checkbox');
 
     const onSubmit = React.useCallback(
         (e: any) => {
             e.preventDefault();
 
             if (!checkbox.state) {
-                // update the state manually from the `confirm` result
+
                 checkbox.setState(window.confirm('Do you agree to the terms and conditions?'));
             }
         },
@@ -32,16 +31,6 @@ export const CheckboxLocal: React.FC = () => {
 
     return (
         <div>
-            {/* <form onSubmit={onSubmit}>
-            <Checkbox {...checkbox}>
-                Do you agree to the terms and conditions?
-            </Checkbox>
-            <Checkbox {...checkbox2}>
-                Do you agree to the terms and conditions!!!!?
-            </Checkbox>
-            
-        </form> */}
-
             <div>
                 <div className='custom-font'>Choose your sex</div>
                 <div>

@@ -1,40 +1,48 @@
 import '../fbChatLp/fbChatStyles.scss';
-import { FbAnimation, FbMessage } from './animation/FbAnimation';
-import { useEffect, useState } from 'react';
-import { LocalInput } from "../../components/inputs/Input"
+import { FbAll } from './animation/FbAnimation';
+import { useState } from 'react';
+import { LocalInput } from "../../components/inputs/Input";
+import { useSearchParams } from 'react-router-dom';
 
 export const FbChatLanding: React.FC = () => {
-  const [showTyping, setShowTyping] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const inputName: string = searchParams.get('name') || '';
 
-  function showTree(trigger: (value: boolean) => void, trigger2: (value: boolean) => void) {
-    setTimeout(() => {
-      trigger(true);
-    }, 1000)
-    setTimeout(() => {
-      trigger(false)
-    }, 4000)
-    setTimeout(() => {
-      trigger2(true)
-    }, 4500)
+  function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
+    if (!event.target.value) {
+      params.delete('name');
+    } else {
+      params.set('name', event.target.value);
+    }
+
+    setSearchParams(params);
   }
 
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
 
-  useEffect(() => {
-    showTree(setShowTyping, setShowMessage);
-  }, []);
+    if (event.key === 'Enter' && inputName.replace(/\s/g, '').length > 0) {
+      console.log('ok');
+      
+    }
+  }
 
   return (
-    <div className='message-block'>
-      <div className='icon'></div>
-      {showTyping && <FbAnimation text='text text' />} {
-        showMessage &&
-        <div className="">
-          <FbMessage text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!'
-          /> 
-          <LocalInput />
-        </div>
-      }
+    <div className="dialog">
+      <div className='message-block'>
+        <div className='icon'></div>
+
+        <FbAll 
+          text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!' 
+          child={<LocalInput
+            onChange={handleInput}
+            onKeyDown={handleKeyDown}
+            inputErrorText='Please, input your name'
+            field='name'
+          />}  
+        />
+      </div>
+      
     </div>
   )
 }

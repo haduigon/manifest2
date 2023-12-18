@@ -1,34 +1,23 @@
 import { useState } from 'react';
 import '../inputs/localInput.scss';
 import { useSearchParams } from 'react-router-dom';
-// import { KeyboardEvent } from 'react'
 
-export const LocalInput: React.FC = () => {
+type Props = {
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void,
+  inputErrorText: string,
+  field: string
+}
+
+export const LocalInput: React.FC<Props> = ({
+   onChange, 
+   onKeyDown, 
+   inputErrorText, 
+   field,
+}) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const params = new URLSearchParams(searchParams);
-  const inputValue: string = searchParams.get('name') || '';
-  const [error, setError] = useState('');
+  const inputValue: string = searchParams.get(field) || '';
 
-  function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
-    if (!event.target.value) {
-      params.delete('name');
-      setError('Name can`t be empty');
-    } else {
-      params.set('name', event.target.value);
-    }
-    
-    setSearchParams(params);
-  }
-
-  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-
-    if (event.key === 'Enter' && inputValue.length > 0) {
-      console.log('ok');
-      
-    }
-  }
-  console.log(inputValue.replace(/\s/g, '').length);
-  
   return (
     <div className='input-container'>
       <div className='input-box'>
@@ -37,12 +26,12 @@ export const LocalInput: React.FC = () => {
           className="input is-link custom-font input-box" 
           type="text" 
           placeholder="Jhon Smith" 
-          onChange={(event) => handleInput(event)}
+          onChange={(event) => onChange(event)}
           autoFocus
-          onKeyDown={(event) => handleKeyDown(event)}
+          onKeyDown={(event) => onKeyDown(event)}
         />
       </div>
-      {inputValue.trim().length === 0 && <>Please, input your name</>}
+      {inputValue.trim().length === 0 && <>{inputErrorText}</>}
     </div>
   )
 }

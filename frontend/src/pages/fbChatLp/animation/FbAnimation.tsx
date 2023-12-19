@@ -52,6 +52,7 @@ export const FbAll: React.FC<Props> = ({ text, child }) => {
   const [showTyping, setShowTyping] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [showChild, setShowChild] = useState(false);
+  const myRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -68,12 +69,19 @@ export const FbAll: React.FC<Props> = ({ text, child }) => {
         setShowChild(true);
       }, 4600); 
     }
+
+    if (myRef.current) {
+      setTimeout(() => {
+        myRef.current?.scrollIntoView();
+      }, 4650);
+    }
   },[]);
 
   return (
     <div>
       {showTyping && <FbAnimation />} {showMessage && <FbMessage text={text} />}
       {showChild && child}
+      <div ref={myRef}></div>
     </div>
   )
 }

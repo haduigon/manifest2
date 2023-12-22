@@ -6,6 +6,8 @@
     "@djthoms/pretty-checkbox": "^3.1.0",
     "@google-pay/button-react": "^3.0.10",
     "@progress/kendo-react-inputs": "^6.1.1",
+    "@stripe/react-stripe-js": "^2.4.0",
+    "@stripe/stripe-js": "^2.2.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -14,9 +16,10 @@
     "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.7",
     "@types/react-select": "^5.0.1",
-    "axios": "^1.5.0",
+    "axios": "^1.6.2",
     "bulma": "^0.9.4",
     "classnames": "^2.3.2",
+    "mkcert": "^3.2.0",
     "node-sass": "^9.0.0",
     "pretty-checkbox": "^3.0.3",
     "pretty-checkbox-react": "^3.2.0",
@@ -37,7 +40,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true SSL_CRT_FILE=./localhost.pem SSL_KEY_FILE=./localhost-key.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

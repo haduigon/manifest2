@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { LocalInput } from "../../components/inputs/Input";
 import { useSearchParams } from 'react-router-dom';
 import { LocalSelect } from '../../components/select/SelectDateOfBirth';
+// import { Stripe } from '../payments/Stripe';
 
 export const FbChatLanding: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();

@@ -8,6 +8,7 @@ import { App } from '../App';
 import { HoroPage } from '../pages/HoroPage';
 import { AppContextProvider } from './AppContext';
 import { FbChatLanding } from '../pages/fbChatLp/FbChatLanding';
+import { Stripe } from '../pages/payments/Stripe';
 
 export const Root = () => (
   
@@ -19,6 +20,7 @@ export const Root = () => (
         <Route index element={<h1 className='title'>Home page</h1>} />
         <Route path='horo' element={<HoroPage />} />
         <Route path='fb' element={<FbChatLanding />} />
+        <Route path='pay' element={<Stripe />} />
       </Route>
     </Routes>
     </AppContextProvider>

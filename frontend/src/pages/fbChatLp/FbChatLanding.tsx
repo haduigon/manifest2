@@ -5,12 +5,14 @@ import { LocalInput } from "../../components/inputs/Input";
 import { useSearchParams } from 'react-router-dom';
 import { LocalSelect } from '../../components/select/SelectDateOfBirth';
 // import { Stripe } from '../payments/Stripe';
+import { CheckboxLocal } from '../../components/checkbox/CheckboxLocal';
 
 export const FbChatLanding: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const inputName: string = searchParams.get('name') || '';
   const [step2, setStep2] = useState(false);
+  const [radioState, setRadioState] = useState('1');
 
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.value) {
@@ -21,6 +23,9 @@ export const FbChatLanding: React.FC = () => {
 
     setSearchParams(params);
   }
+
+  console.log(radioState, 'radiostate');
+  
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
 
@@ -36,7 +41,7 @@ export const FbChatLanding: React.FC = () => {
         <div className='icon'></div>
 
         <FbAll 
-          text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!' 
+          text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, ' 
           child={<LocalInput
             onChange={handleInput}
             onKeyDown={handleKeyDown}
@@ -45,14 +50,15 @@ export const FbChatLanding: React.FC = () => {
           />}  
         />
       </div>
+
       {step2 &&
         <div className='message-block'>
         <div className='icon'></div>
 
         <FbAll 
-          text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, consequatur tempore consequuntur quaerat doloribus cupiditate debitis exercitationem eos culpa, dolores et quam necessitatibus quibusdam repellat voluptate at, voluptatum eum!' 
+          text={`${inputName}, lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis,`}
           child={
-            <LocalSelect />
+            <CheckboxLocal onChange={setRadioState}/>
           }  
         />
       </div>

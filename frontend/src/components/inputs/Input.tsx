@@ -19,6 +19,7 @@ export const LocalInput: React.FC<Props> = ({
   const inputValue: string = searchParams.get(field) || '';
 
   return (
+    
     <div className='input-container'>
       <div className='input-box'>
         <input
@@ -31,7 +32,7 @@ export const LocalInput: React.FC<Props> = ({
           onKeyDown={(event) => onKeyDown(event)}
         />
       </div>
-      {inputValue.trim().length === 0 && <>{inputErrorText}</>}
+      {inputValue.trim().length === 0 && <div>{inputErrorText}</div>}
     </div>
   )
 }

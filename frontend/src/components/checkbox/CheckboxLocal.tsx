@@ -4,17 +4,22 @@ import '@djthoms/pretty-checkbox';
 import { useState } from 'react';
 import { GiSwordwoman, GiSwordman } from "react-icons/gi";
 import './checkbox.scss';
+import { useSearchParams } from 'react-router-dom';
 
-export const CheckboxLocal: React.FC = () => {
+type Props = {
+    onChange: (event: string) => void,
+    // onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void,
+    // inputErrorText: string,
+    // field: string
+  }
+
+export const CheckboxLocal: React.FC<Props> = ({ onChange }) => {
 
     const checkbox = useCheckboxState() as any;
-    const checkbox2 = useCheckboxState() as any;
-
-    const radio = useRadioState() as any;
-    const radio2 = useRadioState() as any;
-    const radio3 = useRadioState() as any;
-    const [radioState, setRadioState] = useState('');
-
+    const [radioState, setRadioState] = useState('1');
+    const [searchParams, setSearchParams] = useSearchParams();
+    // const params = new URLSearchParams(searchParams);
+    const inputName: string = searchParams.get('name') || '';
 
     const onSubmit = React.useCallback(
         (e: any) => {
@@ -31,29 +36,38 @@ export const CheckboxLocal: React.FC = () => {
 
     return (
         <div>
-            <div>
-                <div className='custom-font'>Choose your sex</div>
-                <div>
-                    <div>
+            <div className='center'>
+                <div className='custom-font mb-10'>Choose your sex, {inputName}</div>
+               {/* <div> */}
+               <div className='choose-box'>
+
+                    <div className='check-box-row'>
                       <GiSwordwoman className='size-25'/>
-                    </div>
+                    
                     <Radio 
                       name="a" 
-                      onChange={() => setRadioState('1')} className='custom-font'
+                      onChange={() => onChange('1')} className='custom-font'
+                      defaultChecked
                       >
                         Female
                     </Radio>
-                </div>
-                <div>
-                    <div>
-                    <GiSwordman className='size-25'/>
                     </div>
+
+                    <div className='check-box-row'>
+                    <GiSwordman className='size-25'/>
+                    
                     <Radio 
                       name="a" 
-                      onChange={() => setRadioState('2')}
+                      onChange={() => onChange('2')}
                       className='custom-font'
-                    >Male</Radio>
+                    >
+                        Male
+                    </Radio>
                 </div>
+
+                </div>
+               
+               {/* </div> */}
 
             </div>
         </div>

@@ -10,6 +10,7 @@ import "./stripe.scss";
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
 const stripePromise = loadStripe("pk_test_51OP1pEIDi1lKDmgLmDINBYKtseC24IjglH6BXaL1GaxAhY88kJBdFL16KfIxIUTXAIMZstIDaYx5gH9ypEa4lTtz00NUvA0dhq");
+// const stripePromise = loadStripe("pk_live_51OP1pEIDi1lKDmgLtS21cdqmc6EMw2M5iFaVXV8mk970Nln9y34U4SgzYFu1zQVxyvbDc5QvCe3u8S4gma16bGM600EuOW1dm4");
 console.log(stripePromise);
 
 const apiUrl = 'https://localhost:3008/';
@@ -22,6 +23,7 @@ export const Stripe: React.FC = () => {
   const client = axios.create({
     baseURL: apiUrl,
   });
+  const [showPayForm, setShowPayForm] = useState(false);
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -48,6 +50,7 @@ export const Stripe: React.FC = () => {
 
   const appearance = {
     theme: 'stripe',
+    labels: 'floating'
   };
   const options = {
     clientSecret,
@@ -62,14 +65,20 @@ export const Stripe: React.FC = () => {
   // })
 
   return (
-    <div className="App">
-      {clientSecret && (
-        <>
-        <Elements options={options as any} stripe={stripePromise}>
-          <CheckoutForm />
-        </Elements>
-        </>
-      )}
-    </div>
+   <div>
+    <button onClick={() => setShowPayForm(true)}>Pay</button>
+    {showPayForm && (
+       <div className="App">
+        1 dollar
+       {clientSecret && (
+         <>
+         <Elements options={options as any} stripe={stripePromise}>
+           <CheckoutForm />
+         </Elements>
+         </>
+       )}
+     </div>
+    )}
+   </div>
   );
 }

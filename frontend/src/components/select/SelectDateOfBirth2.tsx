@@ -6,7 +6,7 @@ import { FbAnimation } from '../../pages/fbChatLp/animation/FbAnimation';
 import { Typewriter } from 'react-simple-typewriter'
 
 
-export const LocalSelect: React.FC = () => {
+export const LocalSelect2: React.FC = () => {
 
   const horoSigns = [
     'Aries',

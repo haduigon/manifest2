@@ -10,8 +10,10 @@ import { GooglePayB } from "../components/googlePay";
 import { useSearchParams } from 'react-router-dom';
 import DotLoader from 'react-spinners/DotLoader';
 import { CheckboxLocal } from '../components/checkbox/CheckboxLocal';
-import { LocalInput } from "../components/inputs/Input";
+// import { LocalInput } from "../components/inputs/Input";
 import { Gi3DGlasses } from "react-icons/gi";
+// import { NameInput } from "../components/inputs/NameInput";
+
 
 export const HoroPage: React.FC = () => {
   const [isPressed, setIsPressed] = useState(false);
@@ -19,11 +21,16 @@ export const HoroPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   console.log(searchParams, 'searchParams');
 
-  const apiUrl = 'http://185.70.185.9:3011';
-
+  // const apiUrl = 'https://ro.sms.destiny4you.com:3011';
+  const apiUrl = 'https://ro.sms.destiny4you.com';
+  
   const client = axios.create({
     baseURL: apiUrl,
+    withCredentials: false,
+    // headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    
   });
+  // client.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
   // my-4 mx-6 add this classes if screen is bigger 600px
   useEffect(() => {
     const screenWidth = window.innerWidth;
@@ -70,7 +77,7 @@ export const HoroPage: React.FC = () => {
 
         <LocalSelect />
 
-        <CheckboxLocal />
+        {/* <CheckboxLocal /> */}
 
       </div>
       <div className="has-text-centered" >

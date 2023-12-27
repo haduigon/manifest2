@@ -2,11 +2,17 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import "./fbstyles.scss";
 
 type Props = {
-  text: string,
+  text: string | ReactNode,
   child?: ReactNode
 }
 
 export const FbAnimation: React.FC = () => {
+  const myRef = useRef<null | HTMLDivElement>(null);
+  useEffect(() => {
+    if (myRef.current) {
+      myRef.current.scrollIntoView();
+    }
+  }, []);
   return (
     <div id="wave">
       <span className="srtextarea"></span>
@@ -18,6 +24,7 @@ export const FbAnimation: React.FC = () => {
       <span className="dot three"></span>
       <p className="">
       </p>
+      <div ref={myRef}></div>
     </div>
   )
 }

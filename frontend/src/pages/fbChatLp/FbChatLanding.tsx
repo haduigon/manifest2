@@ -12,7 +12,7 @@ export const FbChatLanding: React.FC = () => {
   const params = new URLSearchParams(searchParams);
   const inputName: string = searchParams.get('name') || '';
   const [step2, setStep2] = useState(false);
-  const [radioState, setRadioState] = useState('1');
+  const [radioState, setRadioState] = useState('');
 
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.value) {
@@ -24,7 +24,7 @@ export const FbChatLanding: React.FC = () => {
     setSearchParams(params);
   }
 
-  console.log(radioState, 'radiostate');
+  console.log(radioState.length, 'radiostate');
   
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -37,8 +37,6 @@ export const FbChatLanding: React.FC = () => {
 
   return (
     <div className="dialog">
-      <div className='message-block'>
-        <div className='icon'></div>
 
         <FbAll 
           text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, ' 
@@ -49,11 +47,9 @@ export const FbChatLanding: React.FC = () => {
             field='name'
           />}  
         />
-      </div>
 
       {step2 &&
-        <div className='message-block'>
-        <div className='icon'></div>
+
 
         <FbAll 
           text={`${inputName}, lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis,`}
@@ -61,8 +57,20 @@ export const FbChatLanding: React.FC = () => {
             <CheckboxLocal onChange={setRadioState}/>
           }  
         />
-      </div>
+
       }
+      {radioState.length > 0 && (
+
+        <FbAll 
+          text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, ' 
+          child={<LocalInput
+            onChange={handleInput}
+            onKeyDown={handleKeyDown}
+            inputErrorText='Please, input your name'
+            field='name'
+          />}  
+        />
+      )}
     </div>
   )
 }

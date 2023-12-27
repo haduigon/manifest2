@@ -16,7 +16,7 @@ type Props = {
 export const CheckboxLocal: React.FC<Props> = ({ onChange }) => {
 
     const checkbox = useCheckboxState() as any;
-    const [radioState, setRadioState] = useState('1');
+    const [radioState, setRadioState] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
     // const params = new URLSearchParams(searchParams);
     const inputName: string = searchParams.get('name') || '';
@@ -38,7 +38,6 @@ export const CheckboxLocal: React.FC<Props> = ({ onChange }) => {
         <div>
             <div className='center'>
                 <div className='custom-font mb-10'>Choose your sex, {inputName}</div>
-               {/* <div> */}
                <div className='choose-box'>
 
                     <div className='check-box-row'>
@@ -46,8 +45,7 @@ export const CheckboxLocal: React.FC<Props> = ({ onChange }) => {
                     
                     <Radio 
                       name="a" 
-                      onChange={() => onChange('1')} className='custom-font'
-                      defaultChecked
+                      onChange={() => onChange('f')} className='custom-font'
                       >
                         Female
                     </Radio>
@@ -58,7 +56,7 @@ export const CheckboxLocal: React.FC<Props> = ({ onChange }) => {
                     
                     <Radio 
                       name="a" 
-                      onChange={() => onChange('2')}
+                      onChange={() => onChange('m')}
                       className='custom-font'
                     >
                         Male
@@ -67,8 +65,6 @@ export const CheckboxLocal: React.FC<Props> = ({ onChange }) => {
 
                 </div>
                
-               {/* </div> */}
-
             </div>
         </div>
     )

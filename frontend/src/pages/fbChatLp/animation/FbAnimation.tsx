@@ -85,10 +85,13 @@ export const FbAll: React.FC<Props> = ({ text, child }) => {
   },[]);
 
   return (
-    <div>
+    <div className='message-block'>
+      <div className='icon'></div>
+      <div>
       {showTyping && <FbAnimation />} {showMessage && <FbMessage text={text} />}
       {showChild && child}
       <div ref={myRef}></div>
+      </div>
     </div>
   )
 }

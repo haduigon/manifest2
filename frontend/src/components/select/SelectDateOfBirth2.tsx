@@ -43,57 +43,29 @@ export const LocalSelect2: React.FC = () => {
     arrayYear.push(temp);
   })
 
-  function handleSelectDay(value: SingleValue<SelectOption>) {
+  function handleSelectParam(value: SingleValue<SelectOption>, param: string) {
 
-    if (value?.value === 'day') {
-      params.delete('day')
+    if (value?.value === param) {
+      params.delete(param)
     } else {
-      params.set('day', String(value?.value));
+      params.set(param, String(value?.value));
     }
 
     setSearchParams(params);
 
   }
-  function handleSelectMonth(value: SingleValue<SelectOption>) {
 
-    if (value?.value === 'month') {
-      params.delete('month')
-    } else {
-      params.set('month', String(value?.value));
-    }
-
-    setSearchParams(params);
-
+  const selectOptionStyles = {
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center'
   }
-  function handleSelectYear(value: SingleValue<SelectOption>) {
 
-    if (value?.value === 'year') {
-      params.delete('year')
-    } else {
-      params.set('year', String(value?.value));
-    }
 
-    setSearchParams(params);
-
-  }
 
   return (
     <div>
-      {/* <FbAnimation />
-     <div className='custom-font'>
-     <Typewriter
-            words={['Very long sentence is heeereee !!']}
-            loop={5}
-            cursor
-            cursorStyle='|'
-            typeSpeed={70}
-            deleteSpeed={50}
-            delaySpeed={1000}
-            // onLoopDone={handleDone}
-            // onType={handleType}
-          />
-     </div> */}
-      <form>
+      {/* <form> */}
         <div className="select mt-2 is-normal pr-1 custom-font" style={{ width: '100px' }}>
           <Select
             options={arrayDay}
@@ -102,11 +74,9 @@ export const LocalSelect2: React.FC = () => {
                 ...baseStyle,
                 cursor: 'pointer',
               }),
-              option: () => ({
-                cursor: 'pointer'
-              })
+              option: () => (selectOptionStyles)
             }}
-            onChange={handleSelectDay}
+            onChange={(event) => handleSelectParam(event, 'day')}
             placeholder="day"
             isSearchable={false}
           />
@@ -118,12 +88,10 @@ export const LocalSelect2: React.FC = () => {
                 ...baseStyle,
                 cursor: 'pointer',
               }),
-              option: () => ({
-                cursor: 'pointer'
-              })
+              option: () => (selectOptionStyles)
             }}
             options={arrayMonth}
-            onChange={handleSelectMonth}
+            onChange={(event) => handleSelectParam(event, 'month')}
             placeholder="month"
             isSearchable={false}
           />
@@ -136,16 +104,14 @@ export const LocalSelect2: React.FC = () => {
                 ...baseStyle,
                 cursor: 'pointer',
               }),
-              option: () => ({
-                cursor: 'pointer'
-              })
+              option: () => (selectOptionStyles)
             }}
-            onChange={handleSelectYear}
+            onChange={(event) => handleSelectParam(event, 'year')}
             placeholder="year"
             isSearchable={false}
           />
         </div>
-      </form>
+      {/* </form> */}
 
 
       <div>

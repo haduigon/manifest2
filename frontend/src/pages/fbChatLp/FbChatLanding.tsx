@@ -6,6 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 import { LocalSelect } from '../../components/select/SelectDateOfBirth';
 // import { Stripe } from '../payments/Stripe';
 import { CheckboxLocal } from '../../components/checkbox/CheckboxLocal';
+import { LocalSelect2 } from '../../components/select/SelectDateOfBirth2';
 
 export const FbChatLanding: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -39,7 +40,7 @@ export const FbChatLanding: React.FC = () => {
     <div className="dialog">
 
         <FbAll 
-          text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, ' 
+          text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis,Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis ' 
           child={<LocalInput
             onChange={handleInput}
             onKeyDown={handleKeyDown}
@@ -49,28 +50,20 @@ export const FbChatLanding: React.FC = () => {
         />
 
       {step2 &&
-
-
         <FbAll 
           text={`${inputName}, lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis,`}
           child={
             <CheckboxLocal onChange={setRadioState}/>
           }  
-        />
+        />}
 
-      }
       {radioState.length > 0 && (
-
         <FbAll 
           text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis, ' 
-          child={<LocalInput
-            onChange={handleInput}
-            onKeyDown={handleKeyDown}
-            inputErrorText='Please, input your name'
-            field='name'
-          />}  
+          child={<LocalSelect2/>}  
         />
       )}
+
     </div>
   )
 }

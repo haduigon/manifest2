@@ -74,23 +74,23 @@ export const FbAll: React.FC<Props> = ({ text, child }) => {
     if (child) {
       setTimeout(() => {
         setShowChild(true);
-      }, 4600); 
+      }, 4650);
     }
 
     if (myRef.current) {
       setTimeout(() => {
         myRef.current?.scrollIntoView();
-      }, 4650);
+      }, 4750);
     }
-  },[]);
+  }, []);
 
   return (
     <div className='message-block'>
       <div className='icon'></div>
       <div>
-      {showTyping && <FbAnimation />} {showMessage && <FbMessage text={text} />}
-      {showChild && child}
-      <div ref={myRef}></div>
+        {showTyping && <FbAnimation />} {showMessage && <FbMessage text={text} />}
+        {showChild && child}
+        <div ref={myRef} className="mb-10"></div>
       </div>
     </div>
   )

@@ -19,7 +19,7 @@ export const HoroPage: React.FC = () => {
   const [isPressed, setIsPressed] = useState(false);
   const { state, dispatch } = useContext(StateContext);
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams, 'searchParams');
+  // console.log(searchParams, 'searchParams');
 
   // const apiUrl = 'https://ro.sms.destiny4you.com:3011';
   const apiUrl = 'https://ro.sms.destiny4you.com';
@@ -34,26 +34,26 @@ export const HoroPage: React.FC = () => {
   // my-4 mx-6 add this classes if screen is bigger 600px
   useEffect(() => {
     const screenWidth = window.innerWidth;
-    console.log(screenWidth, 'screen');
-
+    // console.log(screenWidth, 'screen');
   }, []);
 
-  let typingText = state.typingText;
+  // let typingText = state.typingText;
 
   function hanldeClick() {
     setSearchParams(`?sign=${state.horoSign}`);
 
     setIsPressed(state => !state);
     dispatch({ type: ACTIONS.SET_TYPING_TEXT, payload: '' });
+    // axops request
     client.post('/chat', {
       prompt: `write me a horoscope for Sagittarius for a week.`
     }).then((resp: any) => {
-      console.log(resp.data.message);
+      // console.log(resp.data.message);
       dispatch({ type: ACTIONS.SET_TYPING_TEXT, payload: '' });
       dispatch({ type: ACTIONS.SET_TYPING_TEXT, payload: resp.data.message });
     });
   }
-  console.log(state.typingText, 'tt');
+  // console.log(state.typingText, 'tt');
   // console.log(typingText.split(' '), 'tt2');
   return (
     <div className={classNames('box has-text-centered', {

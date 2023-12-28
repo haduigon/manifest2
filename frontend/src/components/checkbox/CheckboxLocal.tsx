@@ -8,17 +8,13 @@ import { useSearchParams } from 'react-router-dom';
 
 type Props = {
     onChange: (event: string) => void,
-    // onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void,
-    // inputErrorText: string,
-    // field: string
-  }
+}
 
 export const CheckboxLocal: React.FC<Props> = ({ onChange }) => {
 
     const checkbox = useCheckboxState() as any;
     const [radioState, setRadioState] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
-    // const params = new URLSearchParams(searchParams);
     const inputName: string = searchParams.get('name') || '';
 
     const onSubmit = React.useCallback(

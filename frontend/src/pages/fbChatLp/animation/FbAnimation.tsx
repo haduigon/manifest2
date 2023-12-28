@@ -14,17 +14,20 @@ export const FbAnimation: React.FC = () => {
     }
   }, []);
   return (
-    <div id="wave">
-      <span className="srtextarea"></span>
-      <span className="srfriendzone custom-font">
-        Space AI is typing
-      </span>
-      <span className="dot one"></span>
-      <span className="dot two"></span>
-      <span className="dot three"></span>
-      <p className="">
-      </p>
-      <div ref={myRef}></div>
+    <div className='message-block'>
+      <div className='icon'></div>
+      <div id="wave">
+        <span className="srtextarea"></span>
+        <span className="srfriendzone custom-font">
+          Space AI is typing
+        </span>
+        <span className="dot one"></span>
+        <span className="dot two"></span>
+        <span className="dot three"></span>
+        <p className="">
+        </p>
+        <div ref={myRef}></div>
+      </div>
     </div>
   )
 }
@@ -41,15 +44,18 @@ export const FbMessage: React.FC<Props> = ({ text }) => {
   }, []);
 
   return (
-    <div id="wave" >
-      <span className="srtextarea"></span>
-      <span className="srfriendzone custom-font">
-        {text}
-      </span>
-      <p className="">
+    <div className='message-block'>
+      <div className='icon'></div>
+      <div id="wave" >
+        <span className="srtextarea"></span>
+        <span className="srfriendzone custom-font">
+          {text}
+        </span>
+        <p className="">
 
-      </p>
-      <div ref={myRef}></div>
+        </p>
+        <div ref={myRef}></div>
+      </div>
     </div>
   )
 }
@@ -86,10 +92,12 @@ export const FbAll: React.FC<Props> = ({ text, child }) => {
 
   return (
     <div className='message-block'>
-      <div className='icon'></div>
+      {/* <div className='icon'></div> */}
       <div>
         {showTyping && <FbAnimation />} {showMessage && <FbMessage text={text} />}
-        {showChild && child}
+        <div style={{marginLeft: '65px'}}>
+          {showChild && child}
+        </div>
         <div ref={myRef} className="mb-10"></div>
       </div>
     </div>

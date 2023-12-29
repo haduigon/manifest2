@@ -25,6 +25,7 @@ export const FbChatLanding: React.FC = () => {
   const [step2, setStep2] = useState(false);
   const [radioState, setRadioState] = useState('');
   const [isLoading, setIsLoadong] = useState(false);
+  const [celebs, setCelebs] = useState('')
 
   const apiUrl = 'https://ro.sms.destiny4you.com';
 
@@ -39,10 +40,10 @@ export const FbChatLanding: React.FC = () => {
     if (isBithdateSet) {
       setIsLoadong(true);
       client.post('/chat', {
-        prompt: 'write me three most wellknown celebrities sagittarius'
+        prompt: `write me three female celebreties who were born exectly ${day} ${month} and have the children after 1990 year`
       }).then((response: any) => {
-        console.log(response.data.message, 'resp data');
-        
+        console.log(response.data.message.split('\n\n'), 'resp data');
+        setCelebs(response.data.message.split('\n\n'));
       }).finally(() => {
         setIsLoadong(false)
       })
@@ -59,12 +60,6 @@ export const FbChatLanding: React.FC = () => {
 
     setSearchParams(params);
   }
-
-  // console.log(radioState.length, 'radiostate');
-  console.log(day.length, 'day');
-  console.log(month, 'month');
-  console.log(year, 'year');
-  
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
 
@@ -117,7 +112,9 @@ export const FbChatLanding: React.FC = () => {
       {isLoading && (
         <FbAnimation />
       )}
-
+        {celebs.length > 0 && (
+          <FbAll text={celebs} />
+        )}
     </div>
   )
 }

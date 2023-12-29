@@ -13,21 +13,21 @@ type Props = {
 export const CheckboxLocal: React.FC<Props> = ({ onChange }) => {
 
     const checkbox = useCheckboxState() as any;
-    const [radioState, setRadioState] = useState('');
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [radioState, _setRadioState] = useState('');
+    const [searchParams, _setSearchParams] = useSearchParams();
     const inputName: string = searchParams.get('name') || '';
 
-    const onSubmit = React.useCallback(
-        (e: any) => {
-            e.preventDefault();
+    // const onSubmit = React.useCallback(
+    //     (e: any) => {
+    //         e.preventDefault();
 
-            if (!checkbox.state) {
+    //         if (!checkbox.state) {
 
-                checkbox.setState(window.confirm('Do you agree to the terms and conditions?'));
-            }
-        },
-        [checkbox]
-    );
+    //             checkbox.setState(window.confirm('Do you agree to the terms and conditions?'));
+    //         }
+    //     },
+    //     [checkbox]
+    // );
     console.log(radioState);
 
     return (
@@ -41,7 +41,7 @@ export const CheckboxLocal: React.FC<Props> = ({ onChange }) => {
                     
                     <Radio 
                       name="a" 
-                      onChange={() => onChange('f')} className='custom-font'
+                      onChange={() => onChange('female')} className='custom-font'
                       >
                         Female
                     </Radio>
@@ -52,7 +52,7 @@ export const CheckboxLocal: React.FC<Props> = ({ onChange }) => {
                     
                     <Radio 
                       name="a" 
-                      onChange={() => onChange('m')}
+                      onChange={() => onChange('male')}
                       className='custom-font'
                     >
                         Male

@@ -32,7 +32,9 @@ export const LocalInput: React.FC<Props> = ({
           onKeyDown={(event) => onKeyDown(event)}
         />
       </div>
-      {inputValue.trim().length === 0 && <div>{inputErrorText}</div>}
+      <div className="center-div">
+      {inputValue.trim().length === 0 && <div style={{color: 'lightgrey'}}>{inputErrorText}</div>}<div style={{color: 'lightgrey'}}>&nbsp;press Enter</div>
+      </div>
     </div>
   )
 }

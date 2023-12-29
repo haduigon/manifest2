@@ -5,7 +5,7 @@ import { LocalInput } from "../../components/inputs/Input";
 import { useSearchParams } from 'react-router-dom';
 import { LocalSelect } from '../../components/select/SelectDateOfBirth';
 // import { Stripe } from '../payments/Stripe';
-import { CheckboxLocal } from '../../components/checkbox/CheckboxLocal';
+import { CheckboxSex } from '../../components/checkbox/CheckboxLocal';
 import { LocalSelect2 } from '../../components/select/SelectDateOfBirth2';
 import { SingleValue } from "react-select";
 import axios from 'axios';
@@ -89,7 +89,7 @@ export const FbChatLanding: React.FC = () => {
           child={<LocalInput
             onChange={handleInput}
             onKeyDown={handleKeyDown}
-            inputErrorText='Please, input your name'
+            inputErrorText='Input your name and'
             field='name'
           />}  
         />
@@ -98,7 +98,10 @@ export const FbChatLanding: React.FC = () => {
         <FbAll 
           text={`${inputName}, lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis,`}
           child={
-            <CheckboxLocal onChange={setRadioState}/>
+            <CheckboxSex 
+              onChange={setRadioState}
+              text={`${inputName}, select your sex`}  
+            />
           }  
         />}
 

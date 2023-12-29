@@ -8,32 +8,64 @@ import { useSearchParams } from 'react-router-dom';
 
 type Props = {
     onChange: (event: string) => void,
+    text?: string,
+    text2?: string,
+    text3?: string,
 }
 
-export const CheckboxLocal: React.FC<Props> = ({ onChange }) => {
+export const CheckboxSex: React.FC<Props> = ({ onChange, text }) => {
 
-    const checkbox = useCheckboxState() as any;
     const [radioState, _setRadioState] = useState('');
     const [searchParams, _setSearchParams] = useSearchParams();
-    const inputName: string = searchParams.get('name') || '';
 
-    // const onSubmit = React.useCallback(
-    //     (e: any) => {
-    //         e.preventDefault();
-
-    //         if (!checkbox.state) {
-
-    //             checkbox.setState(window.confirm('Do you agree to the terms and conditions?'));
-    //         }
-    //     },
-    //     [checkbox]
-    // );
     console.log(radioState);
 
     return (
         <div>
             <div className='center'>
-                <div className='custom-font mb-10'>Choose your sex, {inputName}</div>
+                <div className='custom-font mb-10'>{text}</div>
+               <div className='choose-box'>
+
+                    <div className='check-box-row'>
+                      <GiSwordwoman className='size-25'/>
+                    
+                    <Radio 
+                      name="a" 
+                      onChange={() => onChange('female')} className='custom-font'
+                      >
+                        Female
+                    </Radio>
+                    </div>
+
+                    <div className='check-box-row'>
+                    <GiSwordman className='size-25'/>
+                    
+                    <Radio 
+                      name="a" 
+                      onChange={() => onChange('male')}
+                      className='custom-font'
+                    >
+                        Male
+                    </Radio>
+                </div>
+
+                </div>
+               
+            </div>
+        </div>
+    )
+}
+export const CheckboxCelebs: React.FC<Props> = ({ onChange, text }) => {
+
+    const [radioState, _setRadioState] = useState('');
+    const [searchParams, _setSearchParams] = useSearchParams();
+
+    console.log(radioState);
+
+    return (
+        <div>
+            <div className='center'>
+                <div className='custom-font mb-10'>{text}</div>
                <div className='choose-box'>
 
                     <div className='check-box-row'>

@@ -25,7 +25,8 @@ export const FbChatLanding: React.FC = () => {
   const [step2, setStep2] = useState(false);
   const [radioState, setRadioState] = useState('');
   const [isLoading, setIsLoadong] = useState(false);
-  const [celebs, setCelebs] = useState('')
+  const [celebs, setCelebs] = useState('');
+  // const [showEnter, setShowEnter] = useState(false);
 
   const apiUrl = 'https://ro.sms.destiny4you.com';
 
@@ -91,6 +92,7 @@ export const FbChatLanding: React.FC = () => {
             onKeyDown={handleKeyDown}
             inputErrorText='Input your name and'
             field='name'
+            showEnter={step2}
           />}  
         />
 

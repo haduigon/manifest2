@@ -6,7 +6,8 @@ type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void,
   inputErrorText: string,
-  field: string
+  field: string,
+  showEnter: boolean,
 }
 
 export const LocalInput: React.FC<Props> = ({
@@ -14,6 +15,7 @@ export const LocalInput: React.FC<Props> = ({
    onKeyDown, 
    inputErrorText, 
    field,
+   showEnter,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const inputValue: string = searchParams.get(field) || '';
@@ -33,7 +35,7 @@ export const LocalInput: React.FC<Props> = ({
         />
       </div>
       <div className="center-div">
-      {inputValue.trim().length === 0 && <div style={{color: 'lightgrey'}}>{inputErrorText}</div>}<div style={{color: 'lightgrey'}}>&nbsp;press Enter</div>
+      {inputValue.trim().length === 0 && <div style={{color: 'lightgrey'}}>{inputErrorText}</div>}<div style={{color: 'lightgrey'}}>&nbsp;{!showEnter && 'press Enter'}</div>
       </div>
     </div>
   )

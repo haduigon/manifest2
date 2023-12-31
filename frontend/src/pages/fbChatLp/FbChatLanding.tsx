@@ -1,11 +1,11 @@
 import '../fbChatLp/fbChatStyles.scss';
-import { FbAll, FbAnimation } from './animation/FbAnimation';
+import { FbAll, FbAnimation, FbMessage } from './animation/FbAnimation';
 import { useEffect, useState } from 'react';
 import { LocalInput } from "../../components/inputs/Input";
 import { useSearchParams } from 'react-router-dom';
 import { LocalSelect } from '../../components/select/SelectDateOfBirth';
 // import { Stripe } from '../payments/Stripe';
-import { CheckboxSex } from '../../components/checkbox/CheckboxLocal';
+import { CheckboxSex, CheckboxCelebs } from '../../components/checkbox/CheckboxLocal';
 import { LocalSelect2 } from '../../components/select/SelectDateOfBirth2';
 import { SingleValue } from "react-select";
 import axios from 'axios';
@@ -25,9 +25,9 @@ export const FbChatLanding: React.FC = () => {
   const [step2, setStep2] = useState(false);
   const [radioState, setRadioState] = useState('');
   const [isLoading, setIsLoadong] = useState(false);
-  const [celebs, setCelebs] = useState('');
+  const [celebs, setCelebs] = useState<string[]>([]);
   // const [showEnter, setShowEnter] = useState(false);
-
+  // const stringa = celebs[1]
   const apiUrl = 'https://ro.sms.destiny4you.com';
 
   const client = axios.create({
@@ -43,7 +43,7 @@ export const FbChatLanding: React.FC = () => {
       client.post('/chat', {
         prompt: `write me three female celebreties who were born exectly ${day} ${month} and have the children after 1990 year`
       }).then((response: any) => {
-        console.log(response.data.message.split('\n\n'), 'resp data');
+        // console.log(response.data.message.split('\n\n'), 'resp data');
         setCelebs(response.data.message.split('\n\n'));
       }).finally(() => {
         setIsLoadong(false)
@@ -51,6 +51,7 @@ export const FbChatLanding: React.FC = () => {
     }
   }, [isBithdateSet])
 
+  console.log(celebs, 'celebs state');
   
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.value) {
@@ -92,7 +93,7 @@ export const FbChatLanding: React.FC = () => {
             onKeyDown={handleKeyDown}
             inputErrorText='Input your name and'
             field='name'
-            showEnter={step2}
+            showEnter={step2 }
           />}  
         />
 
@@ -118,7 +119,17 @@ export const FbChatLanding: React.FC = () => {
         <FbAnimation />
       )}
         {celebs.length > 0 && (
-          <FbAll text={celebs} />
+          <FbMessage
+            text={celebs[2]}
+            child={
+              <CheckboxCelebs
+                text2={celebs[2]}
+                text3={celebs[3]}
+                text={celebs[1]}
+                onChange={() => {}}
+                />
+            }
+             />
         )}
     </div>
   )

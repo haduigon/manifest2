@@ -55,40 +55,54 @@ export const CheckboxSex: React.FC<Props> = ({ onChange, text }) => {
         </div>
     )
 }
-export const CheckboxCelebs: React.FC<Props> = ({ onChange, text }) => {
+export const CheckboxCelebs: React.FC<Props> = ({ text, text2, text3 }) => {
 
-    const [radioState, _setRadioState] = useState('');
-    const [searchParams, _setSearchParams] = useSearchParams();
+    // const [radioState, _setRadioState] = useState('');
+    // const [searchParams, _setSearchParams] = useSearchParams();
 
-    console.log(radioState);
+    // console.log(radioState);
 
     return (
         <div>
-            <div className='center'>
-                <div className='custom-font mb-10'>{text}</div>
+            <div className='center' style={{width: "300"}}>
+                <div className='custom-font mb-10'>dglkvngbnfj</div>
                <div className='choose-box'>
 
-                    <div className='check-box-row'>
-                      <GiSwordwoman className='size-25'/>
-                    
+                    <div className='check-box-row' style={{width: "300px"}}>
+                      {/* <GiSwordwoman className='size-25'/> */}
+                      
                     <Radio 
                       name="a" 
-                      onChange={() => onChange('female')} className='custom-font'
+                       className='custom-font'
+                      
                       >
-                        Female
+                        
                     </Radio>
+                    <div style={{width: "210px"}}>{text}</div>
                     </div>
 
-                    <div className='check-box-row'>
-                    <GiSwordman className='size-25'/>
+                    <div className='check-box-row' style={{width: "300px"}}>
+                    {/* <GiSwordman className='size-25'/> */}
                     
                     <Radio 
                       name="a" 
-                      onChange={() => onChange('male')}
                       className='custom-font'
                     >
-                        Male
+                        
                     </Radio>
+                    <div style={{width: "210px"}}>{text2}</div>
+                </div>
+
+                    <div className='check-box-row' style={{width: "300px"}}>
+                    {/* <GiSwordman className='size-25'/> */}
+                    
+                    <Radio 
+                      name="a" 
+                      className='custom-font'
+                    >
+                        
+                    </Radio>
+                    <div style={{width: "210px"}}>{text3}</div>
                 </div>
 
                 </div>

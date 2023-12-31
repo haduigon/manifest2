@@ -32,7 +32,7 @@ export const FbAnimation: React.FC = () => {
   )
 }
 
-export const FbMessage: React.FC<Props> = ({ text }) => {
+export const FbMessage: React.FC<Props> = ({ text, child }) => {
   const myRef = useRef<null | HTMLDivElement>(null);
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
   console.log(windowSize);
@@ -44,7 +44,8 @@ export const FbMessage: React.FC<Props> = ({ text }) => {
   }, []);
 
   return (
-    <div className='message-block'>
+    <>
+     <div className='message-block'>
       <div className='icon'></div>
       <div id="wave" >
         <span className="srtextarea"></span>
@@ -54,9 +55,14 @@ export const FbMessage: React.FC<Props> = ({ text }) => {
         <p className="">
 
         </p>
+        
         <div ref={myRef}></div>
+        
       </div>
+     
     </div>
+    <div style={{marginLeft: '65px'}}>{child}</div>
+    </>
   )
 }
 

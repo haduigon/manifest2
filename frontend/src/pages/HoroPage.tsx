@@ -9,7 +9,7 @@ import { LocalSelect } from "../components/select/SelectDateOfBirth";
 import { GooglePayB } from "../components/googlePay";
 import { useSearchParams } from 'react-router-dom';
 import DotLoader from 'react-spinners/DotLoader';
-import { CheckboxSex } from '../components/checkbox/CheckboxLocal';
+import { CheckboxTwin } from '../components/checkbox/CheckboxLocal';
 // import { LocalInput } from "../components/inputs/Input";
 import { Gi3DGlasses } from "react-icons/gi";
 // import { NameInput } from "../components/inputs/NameInput";

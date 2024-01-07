@@ -13,7 +13,8 @@ const stripePromise = loadStripe("pk_test_51OP1pEIDi1lKDmgLmDINBYKtseC24IjglH6BX
 // const stripePromise = loadStripe("pk_live_51OP1pEIDi1lKDmgLtS21cdqmc6EMw2M5iFaVXV8mk970Nln9y34U4SgzYFu1zQVxyvbDc5QvCe3u8S4gma16bGM600EuOW1dm4");
 console.log(stripePromise);
 
-const apiUrl = 'https://localhost:3008/';
+// const apiUrl = 'https://ro.sms.destiny4you.com';
+const apiUrl = 'https://localhost:3008';
 
 // const stripe = loadStripe('sk_test_51OP1pEIDi1lKDmgLd2beWHhTkhfVNn7ipVI23ww8gRusPKUK2WHg68YynY7RK8tI8326uHnE50ty3lLIC4YPtMaM00ePzMFw5H');
 export const Stripe: React.FC = () => {
@@ -31,7 +32,8 @@ export const Stripe: React.FC = () => {
       // method: "POST",
       headers: { "Content-Type": "application/json",           'Access-Control-Allow-Origin': '*'
     },
-      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+      // body: JSON.stringify({ items: [{ id: "xl-tshirt" },{ amount: 2 } ] }),
+       items: { id: "xl-tshirt", amount: 2 }
     })
       .then((res) => {
         // res.json();

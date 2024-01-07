@@ -5,10 +5,11 @@ import { LocalInput } from "../../components/inputs/Input";
 import { useSearchParams } from 'react-router-dom';
 import { LocalSelect } from '../../components/select/SelectDateOfBirth';
 // import { Stripe } from '../payments/Stripe';
-import { CheckboxSex, CheckboxCelebs } from '../../components/checkbox/CheckboxLocal';
+import { CheckboxTwin, CheckboxCelebs } from '../../components/checkbox/CheckboxLocal';
 import { LocalSelect2 } from '../../components/select/SelectDateOfBirth2';
 import { SingleValue } from "react-select";
 import axios from 'axios';
+import { GiSwordwoman, GiSwordman } from "react-icons/gi";
 
 type SelectOption = {
   value: string | number | null,
@@ -26,6 +27,7 @@ export const FbChatLanding: React.FC = () => {
   const [radioState, setRadioState] = useState('');
   const [isLoading, setIsLoadong] = useState(false);
   const [celebs, setCelebs] = useState<string[]>([]);
+  const [choosenCeleb, setChoosenCeleb] = useState('0');
   // const [showEnter, setShowEnter] = useState(false);
   // const stringa = celebs[1]
   const apiUrl = 'https://ro.sms.destiny4you.com';
@@ -41,9 +43,9 @@ export const FbChatLanding: React.FC = () => {
     if (isBithdateSet) {
       setIsLoadong(true);
       client.post('/chat', {
-        prompt: `write me three female celebreties who were born exectly ${day} ${month} and have the children after 1990 year`
+        prompt: `write me three female celebreties who were born exectly ${day} ${month} and have the children after 1991 year`
       }).then((response: any) => {
-        // console.log(response.data.message.split('\n\n'), 'resp data');
+        console.log(response.data.message.split('\n\n'), 'resp data');
         setCelebs(response.data.message.split('\n\n'));
       }).finally(() => {
         setIsLoadong(false)
@@ -51,7 +53,7 @@ export const FbChatLanding: React.FC = () => {
     }
   }, [isBithdateSet])
 
-  console.log(celebs, 'celebs state');
+  console.log(choosenCeleb, 'celebs state');
   
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.value) {
@@ -83,6 +85,13 @@ export const FbChatLanding: React.FC = () => {
 
   }
 
+  if (celebs.length) {
+    const defice = celebs[1].indexOf('-');
+  const celebName = celebs[1].slice(3, defice);
+  console.log(celebName, 'name');
+  }
+  
+
   return (
     <div className="dialog">
 
@@ -101,9 +110,11 @@ export const FbChatLanding: React.FC = () => {
         <FbAll 
           text={`${inputName}, lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reiciendis,`}
           child={
-            <CheckboxSex 
+            <CheckboxTwin 
               onChange={setRadioState}
-              text={`${inputName}, select your sex`}  
+              text={`${inputName}, select your sex`} 
+              icon1={<GiSwordwoman className='size-25'/>} 
+              icon2={<GiSwordman className='size-25'/>}
             />
           }  
         />}
@@ -120,16 +131,28 @@ export const FbChatLanding: React.FC = () => {
       )}
         {celebs.length > 0 && (
           <FbMessage
-            text={celebs[2]}
+            text="This day were born next wemen, please choose whom do you assosiate yourself with more"
             child={
               <CheckboxCelebs
                 text2={celebs[2]}
                 text3={celebs[3]}
                 text={celebs[1]}
-                onChange={() => {}}
+                onChange={setChoosenCeleb}
                 />
             }
              />
+        )}
+
+        {choosenCeleb !== '0' && (
+          <FbAll
+            text='Are you married?'
+            child={
+              <CheckboxTwin 
+                text='please, choose' 
+                onChange={() => {}}
+              />
+            }
+          />
         )}
     </div>
   )

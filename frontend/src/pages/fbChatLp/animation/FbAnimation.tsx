@@ -46,7 +46,7 @@ export const FbMessage: React.FC<Props> = ({ text, child }) => {
   return (
     <>
      <div className='message-block'>
-      <div className='icon'></div>
+      <div className='icon mt100'></div>
       <div id="wave" >
         <span className="srtextarea"></span>
         <span className="srfriendzone custom-font">
@@ -57,9 +57,8 @@ export const FbMessage: React.FC<Props> = ({ text, child }) => {
         </p>
         
         <div ref={myRef}></div>
-        
       </div>
-     
+      {/* <div className='icon'></div> */}
     </div>
     <div style={{marginLeft: '65px'}}>{child}</div>
     </>

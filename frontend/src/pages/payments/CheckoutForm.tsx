@@ -9,6 +9,12 @@ import {
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
+  // const elements = stripe.elements({
+  //   mode: 'payment',
+  //   amount: 1099,
+  //   currency: 'usd',
+  //   appearance,
+  // })
 
   const [message, setMessage] = useState(null) as any;
   const [isLoading, setIsLoading] = useState(false);
@@ -47,23 +53,23 @@ export default function CheckoutForm() {
     });
 
     // if (stripe) {
-      // const pr = stripe.paymentRequest({
-      //   country: 'GR',
-      //   currency: 'eu',
-      //   total: {
-      //     label: 'Demo total',
-      //     amount: 1099,
-      //   },
-      //   requestPayerName: true,
-      //   requestPayerEmail: true,
-      // });
+    //   const pr = stripe.paymentRequest({
+    //     country: 'GR',
+    //     currency: 'eu',
+    //     total: {
+    //       label: 'Demo total',
+    //       amount: 1099,
+    //     },
+    //     requestPayerName: true,
+    //     requestPayerEmail: true,
+    //   });
 
-      // // Check the availability of the Payment Request API.
-      // pr.canMakePayment().then(result => {
-      //   if (result) {
-      //     setPaymentRequest(pr as any);
-      //   }
-      // });
+    //   // Check the availability of the Payment Request API.
+    //   pr.canMakePayment().then(result => {
+    //     if (result) {
+    //       setPaymentRequest(pr as any);
+    //     }
+    //   });
     // }
   }, [stripe]);
 
@@ -78,11 +84,13 @@ export default function CheckoutForm() {
 
     setIsLoading(true);
 
+    console.log(elements, 'elements');
+    
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "https://localhost:3003",
+        return_url: "https://localhost:3000/#/horo?test='",
       },
     });
 

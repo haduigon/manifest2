@@ -25,11 +25,13 @@ const calculateOrderAmount = (items) => {
   // Replace this constant with a calculation of the order's amount
   // Calculate the order total on the server to prevent
   // people from directly manipulating the amount on the client
-  return 1400;
+  // console.log(items[0]);
+  return  items.amount * 200;
 };
 app.get('/', () => console.log('ok test'));
 app.post("/create-payment-intent", async (req, res) => {
   const { items } = req.body;
+  console.log(items, 'items');
   // res.setHeader("Access-Control-Allow-Origin", '*')
   // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({

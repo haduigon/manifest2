@@ -45,22 +45,24 @@ export const FbMessage: React.FC<Props> = ({ text, child }) => {
 
   return (
     <>
-     <div className='message-block'>
-      <div className='icon mt100'></div>
-      <div id="wave" >
-        <span className="srtextarea"></span>
-        <span className="srfriendzone custom-font">
-          {text}
-        </span>
-        <p className="">
+      <div className='message-block'>
+        <div className='icon mt100'></div>
+        <div id="wave" >
+          <span className="srtextarea"></span>
+          <span className="srfriendzone custom-font">
+            {text}
+          </span>
+          <p className="">
 
-        </p>
-        
-        <div ref={myRef}></div>
+          </p>
+
+
+        </div>
+        {/* <div className='icon'></div> */}
       </div>
-      {/* <div className='icon'></div> */}
-    </div>
-    <div style={{marginLeft: '65px'}}>{child}</div>
+      <div ref={myRef}></div>
+      <div style={{ marginLeft: '65px' }}>{child}</div>
+      
     </>
   )
 }
@@ -100,7 +102,7 @@ export const FbAll: React.FC<Props> = ({ text, child }) => {
       {/* <div className='icon'></div> */}
       <div>
         {showTyping && <FbAnimation />} {showMessage && <FbMessage text={text} />}
-        <div style={{marginLeft: '65px'}}>
+        <div style={{ marginLeft: '65px' }}>
           {showChild && child}
         </div>
         <div ref={myRef} className="mb-10"></div>

@@ -15,7 +15,7 @@ type Props = {
     icon2?: React.ReactNode,
 }
 
-export const CheckboxTwin: React.FC<Props> = ({ onChange, text, icon1, icon2 }) => {
+export const CheckboxTwin: React.FC<Props> = ({ onChange, text, icon1, icon2, text2, text3 }) => {
 
     const [radioState, _setRadioState] = useState('');
     const [searchParams, _setSearchParams] = useSearchParams();
@@ -36,7 +36,7 @@ export const CheckboxTwin: React.FC<Props> = ({ onChange, text, icon1, icon2 }) 
                       name="a" 
                       onChange={() => onChange('female')} className='custom-font'
                       >
-                        Female
+                        {text2}
                     </Radio>
                     </div>
 
@@ -48,7 +48,7 @@ export const CheckboxTwin: React.FC<Props> = ({ onChange, text, icon1, icon2 }) 
                       onChange={() => onChange('male')}
                       className='custom-font'
                     >
-                        Male
+                        {text3}
                     </Radio>
                 </div>
 

@@ -65,6 +65,7 @@ export const LocalSelect2: React.FC<Props> = ({ onChange }) => {
             }),
             option: () => (selectOptionStyles)
           }}
+          menuPlacement="top"
           onChange={(event) => onChange(event, 'day')}
           placeholder="day"
           isSearchable={false}
@@ -79,6 +80,7 @@ export const LocalSelect2: React.FC<Props> = ({ onChange }) => {
             }),
             option: () => (selectOptionStyles)
           }}
+          menuPlacement="top"
           options={arrayMonth}
           onChange={(event) => onChange(event, 'month')}
           placeholder="month"
@@ -95,6 +97,7 @@ export const LocalSelect2: React.FC<Props> = ({ onChange }) => {
             }),
             option: () => (selectOptionStyles)
           }}
+          menuPlacement="top"
           onChange={(event) => onChange(event, 'year')}
           placeholder="year"
           isSearchable={false}

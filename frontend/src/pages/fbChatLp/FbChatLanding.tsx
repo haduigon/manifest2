@@ -113,6 +113,8 @@ export const FbChatLanding: React.FC = () => {
             <CheckboxTwin 
               onChange={setRadioState}
               text={`${inputName}, select your sex`} 
+              text2="Female"
+              text3="Male"
               icon1={<GiSwordwoman className='size-25'/>} 
               icon2={<GiSwordman className='size-25'/>}
             />

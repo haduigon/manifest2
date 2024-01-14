@@ -10,7 +10,7 @@ export const FbAnimation: React.FC = () => {
   const myRef = useRef<null | HTMLDivElement>(null);
   useEffect(() => {
     if (myRef.current) {
-      myRef.current.scrollIntoView();
+      myRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, []);
   return (
@@ -18,16 +18,18 @@ export const FbAnimation: React.FC = () => {
       <div className='icon'></div>
       <div id="wave">
         <span className="srtextarea"></span>
-        <span className="srfriendzone custom-font">
+        <span className="srfriendzone custom-font" ref={myRef}>
           Space AI is typing
+          {/* <div ref={myRef} >myref</div> */}
         </span>
         <span className="dot one"></span>
         <span className="dot two"></span>
         <span className="dot three"></span>
         <p className="">
         </p>
-        <div ref={myRef}></div>
+        
       </div>
+      
     </div>
   )
 }
@@ -39,7 +41,7 @@ export const FbMessage: React.FC<Props> = ({ text, child }) => {
 
   useEffect(() => {
     if (myRef.current) {
-      myRef.current.scrollIntoView();
+      myRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, []);
 
@@ -49,8 +51,9 @@ export const FbMessage: React.FC<Props> = ({ text, child }) => {
         <div className='icon mt100'></div>
         <div id="wave" >
           <span className="srtextarea"></span>
-          <span className="srfriendzone custom-font">
+          <span className="srfriendzone custom-font" ref={myRef}>
             {text}
+            {/* <div ref={myRef} >myref2</div> */}
           </span>
           <p className="">
 
@@ -59,8 +62,9 @@ export const FbMessage: React.FC<Props> = ({ text, child }) => {
 
         </div>
         {/* <div className='icon'></div> */}
+        
       </div>
-      <div ref={myRef}></div>
+      
       <div style={{ marginLeft: '65px' }}>{child}</div>
       
     </>
@@ -92,21 +96,23 @@ export const FbAll: React.FC<Props> = ({ text, child }) => {
 
     if (myRef.current) {
       setTimeout(() => {
-        myRef.current?.scrollIntoView();
-      }, 4750);
+        myRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 4850);
     }
   }, []);
 
   return (
     <div className='message-block'>
       {/* <div className='icon'></div> */}
-      <div>
+      <div >
         {showTyping && <FbAnimation />} {showMessage && <FbMessage text={text} />}
-        <div style={{ marginLeft: '65px' }}>
+        <div style={{ marginLeft: '65px' }} ref={myRef} className="mb-10">
           {showChild && child}
+          {/* <div ref={myRef} >myref3</div> */}
         </div>
-        <div ref={myRef} className="mb-10"></div>
+        
       </div>
+      
     </div>
   )
 }

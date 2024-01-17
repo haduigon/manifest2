@@ -34,7 +34,7 @@ export const CheckboxTwin: React.FC<Props> = ({ onChange, text, icon1, icon2, te
                     
                     <Radio 
                       name="a" 
-                      onChange={() => onChange('female')} className='custom-font'
+                      onChange={() => onChange(text2 ? text2: '')} className='custom-font'
                       >
                         {text2}
                     </Radio>
@@ -45,7 +45,7 @@ export const CheckboxTwin: React.FC<Props> = ({ onChange, text, icon1, icon2, te
                     {icon2}
                     <Radio 
                       name="a" 
-                      onChange={() => onChange('male')}
+                      onChange={() => onChange(text3 ? text3: '')}
                       className='custom-font'
                     >
                         {text3}

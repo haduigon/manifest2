@@ -5,6 +5,7 @@ require('dotenv/config');
  const https = require('https');
 const fs = require('fs')
 const PDFDocument = require('pdfkit');
+const pdf = require('./createPdf');
 
 const doc = new PDFDocument;
 // const fs = require('fs');
@@ -46,7 +47,7 @@ doc
  
 // Finalize PDF file
 doc.end();
-
+pdf.createPdf('test.pdf', ' it is a test pdf file')
 // This is your test secret API key.
 const stripe = require("stripe")('sk_test_51OP1pEIDi1lKDmgLd2beWHhTkhfVNn7ipVI23ww8gRusPKUK2WHg68YynY7RK8tI8326uHnE50ty3lLIC4YPtMaM00ePzMFw5H');
 
@@ -76,7 +77,8 @@ app.get("/getfile", (req, res) => {
   // const fileLocation ="./example.pdf";
   // const file="example.pdf";
   // res.contentType("application/pdf");
-  const fileLocation = path.resolve(__dirname, 'example.pdf');
+  console.log(req.params);
+  const fileLocation = path.resolve(__dirname, 'test.pdf');
 
   res.setHeader('Content-Type', 'application/pdf');
   res.setHeader('Content-Disposition', 'attachment; filename=example.pdf');

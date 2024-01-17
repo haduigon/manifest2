@@ -1,6 +1,6 @@
 import '../fbChatLp/fbChatStyles.scss';
 import { FbAll, FbAnimation, FbMessage } from './animation/FbAnimation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { LocalInput } from "../../components/inputs/Input";
 import { useSearchParams } from 'react-router-dom';
 import { LocalSelect } from '../../components/select/SelectDateOfBirth';
@@ -10,6 +10,8 @@ import { LocalSelect2 } from '../../components/select/SelectDateOfBirth2';
 import { SingleValue } from "react-select";
 import axios from 'axios';
 import { GiSwordwoman, GiSwordman } from "react-icons/gi";
+// import { SwitchTransition, CSSTransition } from "react-transition-group";
+import { Stripe } from '../payments/Stripe';
 
 type SelectOption = {
   value: string | number | null,
@@ -28,8 +30,8 @@ export const FbChatLanding: React.FC = () => {
   const [isLoading, setIsLoadong] = useState(false);
   const [celebs, setCelebs] = useState<string[]>([]);
   const [choosenCeleb, setChoosenCeleb] = useState('0');
-  // const [showEnter, setShowEnter] = useState(false);
-  // const stringa = celebs[1]
+  const [marriage, setMarriage] = useState('');
+ 
   const apiUrl = 'https://ro.sms.destiny4you.com';
 
   const client = axios.create({
@@ -37,6 +39,8 @@ export const FbChatLanding: React.FC = () => {
     withCredentials: false,
   })
 
+  console.log(marriage);
+  
   const isBithdateSet = (day.length > 0) && (month.length > 0) && (year.length > 0);
   console.log(isBithdateSet, 'data');
   useEffect(() => {
@@ -53,7 +57,7 @@ export const FbChatLanding: React.FC = () => {
     }
   }, [isBithdateSet])
 
-  console.log(choosenCeleb, 'celebs state');
+  // console.log(choosenCeleb, 'celebs state');
   
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
     if (!event.target.value) {
@@ -68,7 +72,7 @@ export const FbChatLanding: React.FC = () => {
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
 
     if (event.key === 'Enter' && inputName.replace(/\s/g, '').length > 0) {
-      console.log('ok');
+      // console.log('ok');
       setStep2(true);
     }
   }
@@ -88,7 +92,7 @@ export const FbChatLanding: React.FC = () => {
   if (celebs.length) {
     const defice = celebs[1].indexOf('-');
   const celebName = celebs[1].slice(3, defice);
-  console.log(celebName, 'name');
+  // console.log(celebName, 'name');
   }
   
 
@@ -151,8 +155,19 @@ export const FbChatLanding: React.FC = () => {
             child={
               <CheckboxTwin 
                 text='please, choose' 
-                onChange={() => {}}
+                onChange={setMarriage}
+                text2='yes'
+                text3='no'
               />
+            }
+          />
+        )}
+
+        {marriage.length > 1 && (
+              <FbAll
+            text='please , pay the bill'
+            child={
+              <Stripe />
             }
           />
         )}

@@ -20,7 +20,6 @@ export const FbAnimation: React.FC = () => {
         <span className="srtextarea"></span>
         <span className="srfriendzone custom-font" ref={myRef}>
           Space AI is typing
-          {/* <div ref={myRef} >myref</div> */}
         </span>
         <span className="dot one"></span>
         <span className="dot two"></span>
@@ -53,20 +52,12 @@ export const FbMessage: React.FC<Props> = ({ text, child }) => {
           <span className="srtextarea"></span>
           <span className="srfriendzone custom-font" ref={myRef}>
             {text}
-            {/* <div ref={myRef} >myref2</div> */}
           </span>
           <p className="">
-
           </p>
-
-
-        </div>
-        {/* <div className='icon'></div> */}
-        
+        </div>        
       </div>
-      
-      <div style={{ marginLeft: '65px' }}>{child}</div>
-      
+      <div style={{ marginLeft: '65px' }}>{child}</div>      
     </>
   )
 }
@@ -103,12 +94,10 @@ export const FbAll: React.FC<Props> = ({ text, child }) => {
 
   return (
     <div className='message-block'>
-      {/* <div className='icon'></div> */}
       <div >
         {showTyping && <FbAnimation />} {showMessage && <FbMessage text={text} />}
         <div style={{ marginLeft: '65px' }} ref={myRef} className="mb-10">
           {showChild && child}
-          {/* <div ref={myRef} >myref3</div> */}
         </div>
         
       </div>

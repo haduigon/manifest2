@@ -34,7 +34,7 @@ export const HoroPage: React.FC = () => {
 
   });
 
-  const fileName = 'example.pdf';
+  const fileName = 'test.pdf';
   async function getFile() {
 
     const response = await downloadFile();
@@ -50,7 +50,10 @@ export const HoroPage: React.FC = () => {
   async function downloadFile() {
     return axios.get("https://localhost:3008/getfile", {
       headers: {
-        'content-type': 'multipart/form-data'
+        'content-type': '*'
+      },
+      params: {
+        body: 'test'
       },
       // responseType: 'arraybuffer',
       responseType: 'blob',

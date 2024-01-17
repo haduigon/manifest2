@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   PaymentElement,
   useStripe,
@@ -52,25 +52,6 @@ export default function CheckoutForm() {
       }
     });
 
-    // if (stripe) {
-    //   const pr = stripe.paymentRequest({
-    //     country: 'GR',
-    //     currency: 'eu',
-    //     total: {
-    //       label: 'Demo total',
-    //       amount: 1099,
-    //     },
-    //     requestPayerName: true,
-    //     requestPayerEmail: true,
-    //   });
-
-    //   // Check the availability of the Payment Request API.
-    //   pr.canMakePayment().then(result => {
-    //     if (result) {
-    //       setPaymentRequest(pr as any);
-    //     }
-    //   });
-    // }
   }, [stripe]);
 
   const handleSubmit = async (e: any) => {
@@ -113,17 +94,30 @@ export default function CheckoutForm() {
     paymentMethodOrder: ['card', 'apple_pay', 'google_pay']
   }
 
+  const payRef = useRef<null | HTMLDivElement>(null);
+  useEffect(() => {
+    if (payRef.current) {
+      setTimeout(() => {
+        payRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 1800)
+      
+    }
+  }, [])
+
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+   <>
+      <form id="payment-form" onSubmit={handleSubmit} >
       {/* <PaymentRequestButtonElement options={{paymentRequest} as any}/> */}
       <PaymentElement id="payment-element" options={paymentElementOptions as any} />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
+      <button disabled={isLoading || !stripe || !elements} id="submit" >
+        <span id="button-text" >
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
       </button>
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>
+    <div ref={payRef}></div>
+   </>
   );
 }
